@@ -1,0 +1,128 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    
+    <title>Measurement in 2D - 4.11</title>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+      #topbar {
+        background: #fff;
+        padding: 10px;
+      }
+
+      .action-button {
+        font-size: 16px;
+        background-color: transparent;
+        border: 1px solid #d3d3d3;
+        color: #6e6e6e;
+        height: 32px;
+        width: 32px;
+        text-align: center;
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+      }
+
+      .action-button:hover,
+      .action-button:focus {
+        background: #0079c1;
+        color: #e4e4e4;
+      }
+
+      .active {
+        background: #0079c1;
+        color: #e4e4e4;
+      }
+
+      .info {
+        background: #fff;
+        height: 100 px;
+        width: 260px;
+        padding: 10px;
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.11/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.11/"></script>
+    <script src = "index.js"> </script>
+    
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+    <div id="topbar">
+      <button
+        class="action-button esri-icon-search"
+        id="searchButton"
+        type="button"
+        title="Search your address"
+      ></button>
+      <button
+        class="action-button esri-icon-polyline"
+        id="distanceButton"
+        type="button"
+        title="Measure distance between two or more points"
+      ></button>
+      <!-- <button
+        class="action-button esri-icon-documentation"
+        id="costButton"
+        type="button"
+        title="Calculate cost of LSLR"
+        disabled
+      ></button> -->
+      <div 
+        class="info"
+        id="info"
+      >
+        Description, steps, and links go here
+      </div>
+      <div 
+        class="info"
+        id="costcalculation"
+        style="display:none;"
+      >
+        <label>Length: </label>
+        <input type = "text" id = "length" disabled></input> <div id = "unit"></div> <br> <hr>
+        <input type="checkbox" id = "option1" unchecked></input>
+        <label>option1</label> <br>
+        <input type="checkbox" id = "option2" unchecked></input>
+        <label>option2</label> <br>
+        <input type="checkbox" id = "option3" unchecked></input>
+        <label>option3</label> <br>
+        <input type="checkbox" id = "option4" unchecked></input>
+        <label>option4</label> <br>
+
+        <input type="checkbox" id = "option5" name = "option5" unchecked></input>
+        <label>option5</label> <br>
+
+        <div id = "more" style = "margin-left:0.5cm;display:none">
+            <input type="checkbox" id = "option6" unchecked></input>
+            <label>option6</label> <br>
+            <input type="checkbox" id = "option7" unchecked></input>
+            <label>option7</label> <br>
+            <input type="checkbox" id = "option8" unchecked></input>
+            <label>option8</label> <br>
+        </div>
+        <button id = "calculate">Calculate</button>
+        <hr>
+        <label>Cost: </label> <span>CAD</span> 
+        <span id = "finalCost"></span>
+      </div>
+    </div>
+  </body>
+</html>
