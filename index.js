@@ -7,13 +7,14 @@ require([
 ], function(MapView, Map, DistanceMeasurement2D,DistanceMeasurement2DViewModel, Search) {
     var activeWidget = null;
     const webmap = new Map ({
-        basemap: "streets-navigation-vector"
+        basemap: "topo"
     });
     // create the map view
     const view = new MapView({
         container: "viewDiv",
         map: webmap,
-        zoom: 1
+        center: [-63.582687, 44.651070],
+        zoom: 13
     });
     // add the toolbar for the measurement widgets
     view.ui.add("topbar", "top-right");
@@ -41,9 +42,9 @@ require([
         );
 
     document
-        .getElementById("option5")
+        .getElementById("driveway")
         .addEventListener("click", function() {
-               var cb = document.getElementById("option5");
+               var cb = document.getElementById("driveway");
                if (cb.checked) {
                    document.getElementById("more").style.display="block";
                } else {
@@ -54,54 +55,69 @@ require([
     document
             .getElementById("calculate")
             .addEventListener("click", function (){
-                var op1 = document.getElementById("option1");
-                var op2 = document.getElementById("option2");
-                var op3 = document.getElementById("option3");
-                var op4 = document.getElementById("option4");
-                var op5 = document.getElementById("option5");
-                var op6 = document.getElementById("option6");
-                var op7 = document.getElementById("option7");
-                var op8 = document.getElementById("option8");
-                
+                var sidewalk = document.getElementById("sidewalk");
+                var trees = document.getElementById("trees");
+                var landscaping = document.getElementById("landscaping");
+                var plantclusters = document.getElementById("plantclusters");
+                var powerlines = document.getElementById("powerlines");
+                var driveway = document.getElementById("driveway");
+                var asphalt = document.getElementById("asphalt");
+                var gravel = document.getElementById("gravel");
+                var exposedaggregate = document.getElementById("exposedaggregate");
+                var concrete = document.getElementById("concrete");
+                var stone = document.getElementById("stone");
+                // var op12 = document.getElementById("gravel");
 
-                var base_multiplier = 1000;
+                var base_multiplier = 475;
                 
-                var option1 = 20;
-                var option2 = 30;
-                var option3 = 40;
-                var option4 = 50;
-                var option5 = 0;
-                var option6 = 70;
-                var option7 = 80;
-                var option8 = 90;
+                var sidewalk_cost = 100;
+                var trees_cost = 100;
+                var landscaping_cost = 100;
+                var plantclusters_cost = 100;
+                var powerlines_cost = 100;
+                var driveway_cost = 0;
+                var asphalt_cost = 100;
+                var gravel_cost = 100;
+                var aggregate_cost = 100;
+                var concrete_cost = 100;
+                var stone_cost = 100;
+                // var length_under_asphalt_cost = 234;
 
                 var incr = 0;
 
-                if (op1.checked) {
-                    incr += option1;
+                if (sidewalk.checked) {
+                    incr += sidewalk_cost;
                 }
-                if (op2.checked) {
-                    incr += option2;
+                if (trees.checked) {
+                    incr += trees_cost;
                 }
-                if (op3.checked) {
-                    incr += option3;
+                if (landscaping.checked) {
+                    incr += landscaping_cost;
                 } 
-                if (op4.checked) {
-                    incr += option4;
+                if (plantclusters.checked) {
+                    incr += plantclusters_cost;
                 } 
-                if (op5.checked) {
-                    incr += option5;
+                if (powerlines.checked) {
+                    incr += powerlines_cost;
                 } 
-                if (op6.checked) {
-                    incr += option6;
+                if (driveway.checked) {
+                    incr += driveway_cost;
+                    if (asphalt.checked) {
+                        incr += asphalt_cost;
+                    } 
+                    if (gravel.checked) {
+                        incr += gravel_cost;
+                    }
+                    if (exposedaggregate.checked) {
+                        incr += aggregate_cost;
+                    }
+                    if (concrete.checked) {
+                        incr += concrete_cost;
+                    }
+                    if (stone.checked) {
+                        incr += stone_cost;
+                    }
                 } 
-                if (op7.checked) {
-                    incr += option7;
-                } 
-                if (op8.checked) {
-                    incr += option8;
-                }
-
                 base_cost = (document.getElementById("length").value) * base_multiplier;
 
                 displayCost (base_cost, incr);
@@ -179,8 +195,9 @@ require([
 
     function setLength (len, metric) {
         len = Math.round(len * 100) / 100;
+        // var met = metric;
         document.getElementById("length").value = len;
-        document.getElementById("unit").value = metric;
+        // document.getElementById("unit").innerHTML = met;
         document.getElementById("costcalculation").style.display = "block";
     }
     function setActiveButton(selectedButton) {

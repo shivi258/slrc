@@ -89,7 +89,9 @@
         class="info"
         id="info"
       >
-        Description, steps, and links go here
+        <strong>Service Lateral Renewal Cost </strong>
+        <br>
+        To know the length of your service lateral, draw a line from your house to the potential location of the your curb stop by selecting two points (one point in your house and double click for another point for your curb stop) <a href = "https://dalu-my.sharepoint.com/:b:/g/personal/sh659141_dal_ca/EeHlsImTZMhFjbj_AIPc90wBMQBiM8inxKR8oBRoOo4UVQ?e=36IYCP" target = "_blank" >How to know the location of your curb stop </a>
       </div>
       <div 
         class="info"
@@ -97,27 +99,38 @@
         style="display:none;"
       >
         <label>Length: </label>
-        <input type = "text" id = "length" disabled></input> <div id = "unit"></div> <br> <hr>
-        <input type="checkbox" id = "option1" unchecked></input>
-        <label>option1</label> <br>
-        <input type="checkbox" id = "option2" unchecked></input>
-        <label>option2</label> <br>
-        <input type="checkbox" id = "option3" unchecked></input>
-        <label>option3</label> <br>
-        <input type="checkbox" id = "option4" unchecked></input>
-        <label>option4</label> <br>
+        <input type = "text" id = "length" style="width: 100px;" disabled></input> <br> <hr>
+        <input type="checkbox" id = "sidewalk" unchecked></input>
+        <label>Sidewalk</label> <br>
+        <input type="checkbox" id = "trees" unchecked></input>
+        <label>Trees</label> <br>
+        <input type="checkbox" id = "landscaping" unchecked></input>
+        <label>Landscaping/Lawn</label> <br>
+        <input type="checkbox" id = "plantclusters" unchecked></input>
+        <label>Plant Clusters</label> <br>
+        <input type="checkbox" id = "powerlines" unchecked></input>
+        <label>Any overhead Power Lines</label> <br>
 
-        <input type="checkbox" id = "option5" name = "option5" unchecked></input>
-        <label>option5</label> <br>
+        <input type="checkbox" id = "driveway" name = "option5" unchecked></input>
+        <label>Driveway</label> <br>
 
         <div id = "more" style = "margin-left:0.5cm;display:none">
-            <input type="checkbox" id = "option6" unchecked></input>
-            <label>option6</label> <br>
-            <input type="checkbox" id = "option7" unchecked></input>
-            <label>option7</label> <br>
-            <input type="checkbox" id = "option8" unchecked></input>
-            <label>option8</label> <br>
+            <input type="checkbox" id = "asphalt" unchecked></input>
+            <label>Asphalt</label> <br>
+            <input type="checkbox" id = "gravel" unchecked></input>
+            <label>Gravel</label> <br>
+            <input type="checkbox" id = "exposedaggregate" unchecked></input>
+            <label>Exposed Aggregate</label> <br>
+            <input type="checkbox" id = "concrete" unchecked></input>
+            <label>Concrete</label> <br>
+            <input type="checkbox" id = "stone" unchecked></input>
+            <label>Stone</label> <br>
         </div>
+        <!-- <br> -->
+        <!-- <label>Length of service lateral under asphalt</label>
+        <input type="number" id = "userinput" unchecked></input>
+        <label>meters</label><br> -->
+
         <button id = "calculate">Calculate</button>
         <hr>
         <label>Cost: </label> <span>CAD</span> 
