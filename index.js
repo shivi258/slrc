@@ -2,9 +2,8 @@ require([
 "esri/views/MapView",
 "esri/Map",
 "esri/widgets/DistanceMeasurement2D",
-"esri/widgets/DistanceMeasurement2D/DistanceMeasurement2DViewModel",
 "esri/widgets/Search"
-], function(MapView, Map, DistanceMeasurement2D,DistanceMeasurement2DViewModel, Search) {
+], function(MapView, Map, DistanceMeasurement2D, Search) {
     var activeWidget = null;
     const webmap = new Map ({
         basemap: "topo"
@@ -172,7 +171,7 @@ require([
 
                 activeWidget.on (
                     "select-result", function(e) {
-                        view.zoom = 16
+                        view.zoom = 18
                     },
                     // setActive(document.getElementById("distanceButton"))
                 );
