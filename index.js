@@ -54,6 +54,7 @@ require([
                var cb = document.getElementById("driveway");
                if (cb.checked) {
                    document.getElementById("more").style.display="block";
+                //    document.getElementById("info").style.display = "none";
                } else {
                 document.getElementById("more").style.display="none";
                }
