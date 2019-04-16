@@ -39,6 +39,14 @@ require([
                 }
             }
         );
+    document
+        .getElementById("refresh")
+        .addEventListener("click", function() {
+                activeWidget.destroy();
+                document.getElementById("costcalculation").style.display = "none";                
+                setActiveWidget("distance");
+            }
+        );
 
     document
         .getElementById("driveway")
@@ -198,6 +206,7 @@ require([
         document.getElementById("length").value = len;
         // document.getElementById("unit").innerHTML = met;
         document.getElementById("costcalculation").style.display = "block";
+        // activeWidget.destroy();
     }
     function setActiveButton(selectedButton) {
         // focus the view to activate keyboard shortcuts for sketching
