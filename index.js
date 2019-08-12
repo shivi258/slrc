@@ -2,12 +2,30 @@ require([
 "esri/views/MapView",
 "esri/Map",
 "esri/widgets/DistanceMeasurement2D",
-"esri/widgets/Search"
-], function(MapView, Map, DistanceMeasurement2D, Search) {
+"esri/widgets/Search",
+"esri/layers/FeatureLayer"
+], function(MapView, Map, DistanceMeasurement2D, Search, FeatureLayer) {
     var activeWidget = null;
+    // var base = new Basemap ({
+    //     baseLayers: "https://tiles.arcgis.com/tiles/11XBiaBYA9Ep0yNJ/arcgis/rest/services/HalifaxBasemap/MapServer"
+    // })
     const webmap = new Map ({
         basemap: "topo"
     });
+
+    var parcelLayer = new FeatureLayer({
+        url: "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/arcgis/rest/services/HRM_Parcel_Polygon_with_Accounts/FeatureServer",
+        id: "parcel"
+    });
+
+    var leadBoundaryLayer = new FeatureLayer ({
+        url: "https://services3.arcgis.com/yc7ImJOpfSdSicRP/arcgis/rest/services/DEV_LeadBoundary_2/FeatureServer",
+        id: "lead"
+    });
+
+
+    webmap.layers.add (parcelLayer);
+    
     // create the map view
     const view = new MapView({
         container: "viewDiv",
@@ -17,6 +35,24 @@ require([
     });
     // add the toolbar for the measurement widgets
     view.ui.add("topbar", "top-right");
+
+    document
+        .getElementById("viewButton")
+        .addEventListener("click", function() {
+                setActiveWidget(null);
+                webmap.layers.add (leadBoundaryLayer);
+                // Window.reload();
+            }
+        );
+
+    document
+        .getElementById("hideButton")
+        .addEventListener("click", function () {
+                setActiveWidget (null);
+                webmap.layers.remove (leadBoundaryLayer);
+                // Window.reload();
+        })
+
     document
         .getElementById("distanceButton")
         .addEventListener("click", function() {
