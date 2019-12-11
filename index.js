@@ -23,7 +23,7 @@ require([
         id: "lead"
     });
 
-
+    leadBoundaryLayer.opacity = 0.5;
     webmap.layers.add (parcelLayer);
     
     // create the map view
