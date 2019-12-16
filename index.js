@@ -13,18 +13,19 @@ require([
         basemap: "topo"
     });
 
-    var parcelLayer = new FeatureLayer({
-        url: "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/arcgis/rest/services/HRM_Parcel_Polygon_with_Accounts/FeatureServer",
-        id: "parcel"
-    });
+    // var parcelLayer = new FeatureLayer({
+    //     url: "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/arcgis/rest/services/HRM_Parcel_Polygon_with_Accounts/FeatureServer",
+    //     id: "parcel"
+    // });
 
     var leadBoundaryLayer = new FeatureLayer ({
         url: "https://services3.arcgis.com/yc7ImJOpfSdSicRP/arcgis/rest/services/DEV_LeadBoundary_2/FeatureServer",
         id: "lead"
     });
 
-
-    webmap.layers.add (parcelLayer);
+    leadBoundaryLayer.opacity = 0.5;
+    
+    webmap.layers.add (leadBoundaryLayer);
     
     // create the map view
     const view = new MapView({
@@ -97,35 +98,57 @@ require([
             }
         );
     document
+        .getElementById("trees_check")
+        .addEventListener("click", function() {
+            var cb = document.getElementById("trees_check");
+            if(cb.checked) {
+                document.getElementById("trees").style.display="block";
+            } else {
+                document.getElementById("trees").style.display="none";
+            }
+        })
+    document
+        .getElementById("plantclusters")
+        .addEventListener("click", function() {
+            var cb = document.getElementById("plantclusters");
+            if(cb.checked) {
+                document.getElementById("plants").style.display="block";
+            } else {
+                document.getElementById("plants").style.display="none";
+            }
+        })
+    document
             .getElementById("calculate")
             .addEventListener("click", function (){
                 var sidewalk = document.getElementById("sidewalk");
-                var trees = document.getElementById("trees");
+                var trees = document.getElementById("trees_check");
                 var landscaping = document.getElementById("landscaping");
                 var plantclusters = document.getElementById("plantclusters");
-                var powerlines = document.getElementById("powerlines");
+                var gutter = document.getElementById("gutter");
                 var driveway = document.getElementById("driveway");
                 var asphalt = document.getElementById("asphalt");
                 var gravel = document.getElementById("gravel");
                 var exposedaggregate = document.getElementById("exposedaggregate");
                 var concrete = document.getElementById("concrete");
                 var stone = document.getElementById("stone");
-                // var op12 = document.getElementById("gravel");
 
-                var base_multiplier = 475;
-                
-                var sidewalk_cost = 100;
-                var trees_cost = 100;
-                var landscaping_cost = 100;
-                var plantclusters_cost = 100;
-                var powerlines_cost = 100;
+                // cost variables
+
+                var base_multiplier = 440;
+                var sidewalk_cost = 570;
+                var trees_cost = 200;
+                var plantclusters_cost = 200;
+
+                var gutter_cost = 240;
+
                 var driveway_cost = 0;
-                var asphalt_cost = 100;
+                var landscaping_cost = 480;
+                
+                var asphalt_cost = 200;
                 var gravel_cost = 100;
-                var aggregate_cost = 100;
-                var concrete_cost = 100;
-                var stone_cost = 100;
-                // var length_under_asphalt_cost = 234;
+                var aggregate_cost = 400;
+                var concrete_cost = 300;
+                var stone_cost = 400;
 
                 var incr = 0;
 
@@ -133,16 +156,20 @@ require([
                     incr += sidewalk_cost;
                 }
                 if (trees.checked) {
-                    incr += trees_cost;
+                    var n = document.getElementById("tree_number").value;
+                    var cost = n * trees_cost;
+                    incr += cost;
                 }
                 if (landscaping.checked) {
                     incr += landscaping_cost;
                 } 
                 if (plantclusters.checked) {
-                    incr += plantclusters_cost;
+                    var n = document.getElementById("cluster_number").value;
+                    var cost = n * plantclusters_cost;
+                    incr += cost;
                 } 
-                if (powerlines.checked) {
-                    incr += powerlines_cost;
+                if (gutter.checked) {
+                    incr += gutter_cost;
                 } 
                 if (driveway.checked) {
                     incr += driveway_cost;
@@ -167,18 +194,6 @@ require([
                 displayCost (base_cost, incr);
 
             })
-    
-    // document
-    //     .getElementById("costButton")
-    //     .addEventListener("click", function() {
-    //            setActiveWidget(null);
-    //             if (!this.classList.contains("active")) {
-    //                 setActiveWidget("search");
-    //             } else {
-    //             setActiveButton(null);
-    //             }
-    //         }
-    //     );
 
     function setActiveWidget(type) {
         switch (type) {
@@ -196,11 +211,9 @@ require([
                 view.ui.add(activeWidget, "top-right");
                 
                 activeWidget.watch("viewModel.state", function(state) {
-                    console.log(state, activeWidget.viewModel.measurement.length);
                     if (state == 'measured') {
                         setLength(activeWidget.viewModel.measurement.length, activeWidget.unit);
-                        console.log(activeWidget.viewModel.measurement.length);
-                        console.log('Current unit: ', activeWidget.unit);
+                        view.ui.remove(activeWidget);
                     }
                 });
                 
@@ -234,7 +247,8 @@ require([
         }
     
     function displayCost (base_cost, incr) {
-        document.getElementById("finalCost").innerHTML = base_cost + incr;
+        var cost = (base_cost + incr).toFixed(2);
+        document.getElementById("finalCost").innerHTML = cost;
     }
 
     function setLength (len, metric) {

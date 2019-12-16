@@ -68,20 +68,35 @@
       <div 
         class="info"
         id="costcalculation"
-        style="display:none; overflow-y: auto; height: 14em;"
+        style="display:none; overflow-y: auto; height: auto;"
       >
         <label>Length: </label>
         <input type = "text" id = "length" style="width: 100px;" disabled></input> <br> <hr>
         <input type="checkbox" id = "sidewalk" unchecked></input>
         <label>Sidewalk</label> <br>
-        <input type="checkbox" id = "trees" unchecked></input>
-        <label>Trees</label> <br>
+        
+        <input type="checkbox" id = "trees_check" unchecked></input>
+        <label>Trees</label><br>
+        
+        <div id = "trees" style="margin-left:0.5cm;display:none">
+          <label>Number of trees:</label>
+          <input type="number" id="tree_number" style="width: 100px;"></input>
+        </div>
+
         <input type="checkbox" id = "landscaping" unchecked></input>
         <label>Landscaping/Lawn</label> <br>
+
         <input type="checkbox" id = "plantclusters" unchecked></input>
         <label>Plant Clusters</label> <br>
-        <input type="checkbox" id = "powerlines" unchecked></input>
-        <label>Any overhead Power Lines</label> <br>
+
+        <div id = "plants" style="margin-left:0.5cm;display:none">
+          <label>Number of clusters:</label>
+          <input type="number" id="cluster_number" style="width: 100px;"></input>
+        </div>
+
+
+        <input type="checkbox" id = "gutter" unchecked></input>
+        <label>Curb and Gutter</label> <br>
 
         <input type="checkbox" id = "driveway" name = "option5" unchecked></input>
         <label>Driveway</label> <br>
