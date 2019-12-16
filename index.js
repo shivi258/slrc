@@ -13,10 +13,10 @@ require([
         basemap: "topo"
     });
 
-    // var parcelLayer = new FeatureLayer({
-    //     url: "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/arcgis/rest/services/HRM_Parcel_Polygon_with_Accounts/FeatureServer",
-    //     id: "parcel"
-    // });
+    var parcelLayer = new FeatureLayer({
+        url: "https://services2.arcgis.com/11XBiaBYA9Ep0yNJ/arcgis/rest/services/HRM_Parcel_Polygon_with_Accounts/FeatureServer",
+        id: "parcel"
+    });
 
     var leadBoundaryLayer = new FeatureLayer ({
         url: "https://services3.arcgis.com/yc7ImJOpfSdSicRP/arcgis/rest/services/DEV_LeadBoundary_2/FeatureServer",
@@ -26,7 +26,7 @@ require([
     leadBoundaryLayer.opacity = 0.5;
     
     webmap.layers.add (leadBoundaryLayer);
-    
+    webmap.layers.add(parcelLayer);
     // create the map view
     const view = new MapView({
         container: "viewDiv",
